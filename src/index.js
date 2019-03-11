@@ -1,5 +1,4 @@
-module.exports =
-function getZerosCount(number, base) {
+module.exports = function getZerosCount(number, base) {
   var result = 0;
   var prime1 = 0;
   var prime2 = 0;
@@ -17,57 +16,122 @@ function getZerosCount(number, base) {
   }
 
   function calculatePrimes(base){
-    while (base%2==0 && base>0){
-      prime1 = 2;
-      base = base/2;
-      timesTwo++;
-      prime2 = base;
+    if(base%2==0){
+      while (base%2==0 && base>0){
+        prime1 = 2;
+        base = base/2;
+        timesTwo++;
+        prime2 = base;
+      }
+      if(base%3==0){
+          while (base%3==0 && base>0){
+            prime2 = 3;
+            base = base/3;
+            timesThree++;
+            prime3 = base;
+        }
+        if(base%7==0){
+            while (base%7==0 && base>0){
+              prime3 = 7;
+              base = base/7;
+
+          }
+        }
+      }
+      if(base%5==0){
+          while (base%5==0 && base>0){
+            prime2 = 5;
+            base = base/5;
+            timesThree++;
+            prime3 = base;
+        }
+      }
+      if(base%7==0){
+          while (base%7==0 && base>0){
+            prime2 = 7;
+            base = base/7;
+            timesThree++;
+            prime3 = base;
+        }
+      }
+
     }
-    if(base%3==0){
-        while (base%3==0 && base>0){
-          prime2 = 3;
-          base = base/3;
+
+
+    else if(base%3==0){
+      while (base%3==0 && base>0){
+        prime1 = 3;
+        base = base/3;
+        timesTwo++;
+        prime2 = base;
+    }
+    if(base%7==0){
+        while (base%7==0 && base>0){
+          prime2 = 7;
+          base = base/7;
           timesThree++;
           prime3 = base;
       }
     }
+    }
+
+
+    else if(base%5==0){
+      while (base%5==0 && base>0){
+        prime1 = 5;
+        base = base/5;
+        timesTwo++;
+        prime2 = base;
+    }
+    }
+    else if(base%7==0){
+      while (base%7==0 && base>0){
+        prime1 = 7;
+        base = base/7;
+        timesTwo++;
+        prime2 = base;
+    }
+    }
+    else if(base%11==0){
+      while (base%11==0 && base>0){
+        prime1 = 11;
+        base = base/11;
+        timesTwo++;
+        prime2 = base;
+    }
+    }
+    else if(base%13==0){
+      while (base%13==0 && base>0){
+        prime1 = 13;
+        base = base/13;
+        timesTwo++;
+        prime2 = base;
+    }
+    }
+
   }
 
 
 
   if(base > 2 && base%2 == 0){
     calculatePrimes(base);
-
-    // console.log(prime1);
-    // console.log(prime2);
-    // console.log(prime3);
-    // console.log(timesTwo);
-    // console.log(timesThree);
-
     findZeros(number, prime1);
-    // console.log(result);
     resultPrimeOne = Math.floor(result/timesTwo);
-    // console.log(resultPrimeOne);
     result = 0;
 
     if(prime2>1){
       findZeros(number, prime2);
-
-      // console.log(result);
       if(timesThree>0){
         resultPrimeTwo = Math.floor(result/timesThree);
       }
       else{
         resultPrimeTwo = result;
       }
-      // console.log(resultPrimeTwo);
       result = 0;
 
       if(prime3>1){
         findZeros(number, prime3);
-        // console.log(result);
         resultPrimeThree = result;
-        // console.log(resultPrimeThree);
       }
       if(resultPrimeThree==0){
         result = Math.min(resultPrimeOne, resultPrimeTwo);
@@ -75,30 +139,125 @@ function getZerosCount(number, base) {
       else{
         result = Math.min(resultPrimeOne, resultPrimeTwo, resultPrimeThree);
       }
-
-      // console.log(result);
     }
     else{
       result = resultPrimeOne;
     }
-
-
-
-
-    // console.log(result);
     return result;
   }
-  else if (base%2 != 0 && base>2){
-    findZeros(number, base);
-    // console.log(result);
+
+  else if(base%3 == 0 && base>3){
+    calculatePrimes(base);
+    findZeros(number, prime1);
+    resultPrimeOne = Math.floor(result/timesTwo);
+
+    if(prime2>1){
+      result = 0;
+      findZeros(number, prime2);
+
+      if(timesThree>0){
+        resultPrimeTwo = Math.floor(result/timesThree);
+      }
+      else{
+        resultPrimeTwo = result;
+      }
+      }
+    if(resultPrimeTwo == 0){
+      result = resultPrimeOne;
+    }
+    else{
+      result = Math.min(resultPrimeOne, resultPrimeTwo);
+    }
+
     return result;
   }
+
+  else if(base%5 == 0 && base>5){
+    calculatePrimes(base);
+    findZeros(number, prime1);
+    resultPrimeOne = Math.floor(result/timesTwo);
+
+    if(prime2>1){
+      result = 0;
+      findZeros(number, prime2);
+      resultPrimeTwo = result;
+      }
+    if(resultPrimeTwo == 0){
+      result = resultPrimeOne;
+    }
+    else{
+      result = Math.min(resultPrimeOne, resultPrimeTwo);
+    }
+
+    return result;
+  }
+
+
+  else if(base%7 == 0 && base>7){
+    calculatePrimes(base);
+    findZeros(number, prime1);
+    resultPrimeOne = Math.floor(result/timesTwo);
+
+    if(prime2>1){
+      result = 0;
+      findZeros(number, prime2);
+      resultPrimeTwo = result;
+      }
+    if(resultPrimeTwo == 0){
+      result = resultPrimeOne;
+    }
+    else{
+      result = Math.min(resultPrimeOne, resultPrimeTwo);
+    }
+
+    return result;
+  }
+  else if(base%11 == 0 && base>11){
+    calculatePrimes(base);
+    findZeros(number, prime1);
+    resultPrimeOne = Math.floor(result/timesTwo);
+
+    if(prime2>1){
+      result = 0;
+      findZeros(number, prime2);
+      resultPrimeTwo = result;
+      }
+    if(resultPrimeTwo == 0){
+      result = resultPrimeOne;
+    }
+    else{
+      result = Math.min(resultPrimeOne, resultPrimeTwo);
+    }
+
+    return result;
+  }
+
+  else if(base%13 == 0 && base>13){
+    calculatePrimes(base);
+    findZeros(number, prime1);
+    resultPrimeOne = Math.floor(result/timesTwo);
+
+    if(prime2>1){
+      result = 0;
+      findZeros(number, prime2);
+      resultPrimeTwo = result;
+      }
+    if(resultPrimeTwo == 0){
+      result = resultPrimeOne;
+    }
+    else{
+      result = Math.min(resultPrimeOne, resultPrimeTwo);
+    }
+    return result;
+  }
+
   else if(base == 2){
     findZeros(number, base);
-    // console.log(result);
+    return result;
+  }
+  else{
+    findZeros(number, base);
     return result;
   }
 
 }
-
-// console.log(getZerosCount(71398757, 12));
